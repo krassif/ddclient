@@ -4,7 +4,7 @@ FROM armhf/alpine:3.5
 RUN apk update && \
 	apk add --no-cache perl && \
 	apk add --no-cache perl-io-socket-ssl && \
-	apk add --no-cache openrc
+	apk add --no-cache perl-netaddr-ip
 
 # add folders related to the config / service
 RUN mkdir /etc/ddclient && \
