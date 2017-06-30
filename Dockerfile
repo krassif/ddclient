@@ -3,9 +3,9 @@ FROM armhf/alpine:3.5
 # add prerequisites
 RUN apk update && \
 	apk add --no-cache perl && \
-	apk add --no-cache perl perl-dev && \
+	apk add --no-cache perl-dev && \
 	apk add --no-cache perl-io-socket-ssl && \
-	apk add --no-cache perl-netaddr-ip && \
+	apk add --no-cache perl-netaddr-ip
 
 # add folders related to the config / service
 RUN mkdir /etc/ddclient && \
