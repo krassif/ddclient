@@ -4,8 +4,8 @@ FROM armhf/alpine:3.5
 ADD ddclient /usr/sbin/ddclient
 ADD sample-etc_rc.d_init.d_ddclient.alpine /etc/init.d/ddclient
 
-RUN apk add perl && \
-	apk add perl-io-socket-ssl
+# RUN apk add perl && \
+# 	apk add perl-io-socket-ssl
 
 # rc-update add ddclient
 # rc-service ddclient start
