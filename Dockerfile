@@ -3,7 +3,7 @@ FROM armhf/alpine:3.5
 # add prerequisites
 RUN apk update && \
 	apk add --no-cache perl && \
-	apk add --no-cache make git perl-dev && \
+	apk add --no-cache make && \
 	apk add --no-cache perl-io-socket-ssl && \
 	apk add --no-cache perl-netaddr-ip && \
 	PERL_MM_USE_DEFAULT=1 cpan -i Data::Validate::IP
