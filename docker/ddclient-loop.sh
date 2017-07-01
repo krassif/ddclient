@@ -1,6 +1,5 @@
 #!/usr/bin/env sh
 
-
 if [ -z "$LOGIN" ]; then
     echo "ERR: LOGIN name is mandatory. Terminating.." && exit 1
 else
@@ -39,6 +38,8 @@ echo_time() {
      date +"[ %Y-%m-%d %H:%M Z ] $(printf "%s " "$@" | sed 's/%/%%/g')"
 }
 
+exit 0
+
 OUT=$(ddclient -daemon=0 -noquiet); R=$?
 if [ $R -ne 0 ]; then
     # exit 1
@@ -49,7 +50,7 @@ echo_time $OUT
 er_count=0
 while :
 do
-    OUT=$(eval "ddclient -daemon=0 -noquiet $DDC_OPTS"); R=$?
+    OUT=$(eval "ddclient -daemon=0 -noquiet $DDC_OPTS" 2>&1 | sed "s/^/[command1] /"); R=$?
     if [ $R -ne 0 ]; then
         echo_time "ERR: ddclient has failed: $R. Inspect the output for additional info."
         er_count=`expr $er_count + 1`
