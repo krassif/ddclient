@@ -33,7 +33,7 @@ fi
 if [ -z "$DAEMON"]; then
     DAEMON=300
 fi
-echo "INFO: Running IP update/ check every $(DAEMON) seconds.."
+echo "INFO: Running IP update/ check every $DAEMON seconds.."
 
 echo_time() {
      date +"[ %Y-%m-%d %H:%M Z ] $(printf "%s " "$@" | sed 's/%/%%/g')"
@@ -65,7 +65,7 @@ do
         exit 1
     fi
 
-    sleep $(DAEMON) || exit 1
+    sleep $DAEMON || exit 1
 
 done
 
