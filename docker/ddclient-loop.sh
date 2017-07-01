@@ -15,7 +15,7 @@ fi
 if [ -z "$HOST" ]; then
     echo "ERR: HOST is mandatory. Terminating.." && exit 1
 else
-    sed -i -e "s/^##YOUR_HOSTNAME##/$(HOST)/" /etc/ddclient/ddclient.conf
+    sed -i -e "s/^##YOUR_HOSTNAME##/$HOST/" /etc/ddclient/ddclient.conf
 fi
 
 if [ -z "$EMAIL" ]; then
