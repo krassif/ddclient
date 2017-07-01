@@ -18,6 +18,6 @@ ADD ddclient /usr/sbin/ddclient
 ADD docker/ddclient-loop.sh /usr/local/bin/ddclient-loop
 ADD docker/docker-etc_ddclient.conf /etc/ddclient/ddclient.conf
 
-RUN chmod 600 /usr/sbin/ddclient
+RUN chmod 600 /etc/ddclient/ddclient.conf
 
 CMD [ "ddclient-loop" ]
