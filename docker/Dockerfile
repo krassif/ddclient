@@ -11,7 +11,8 @@ RUN apk update && \
 
 # add folders related to the config / service
 RUN mkdir /etc/ddclient && \
-	mkdir /var/cache/ddclient
+	mkdir /var/cache/ddclient && \
+	mkdir /var/log/ddclient
 
 # setting up the service
 ADD ddclient /usr/sbin/ddclient
@@ -20,4 +21,4 @@ ADD docker/docker-etc_ddclient.conf /etc/ddclient/ddclient.conf
 
 RUN chmod 600 /etc/ddclient/ddclient.conf
 
-CMD [ "ddclient-loop" ]
+CMD [ "ddclient-loop > /var/log/ddclient/server.log 2>&1" ]
