@@ -14,8 +14,8 @@ RUN mkdir /etc/ddclient && \
 	mkdir /var/cache/ddclient
 
 # setting up the service
-ADD ../ddclient /usr/local/bin/ddclient
-ADD ddclient-loop.sh /usr/local/bin/ddclient-loop
-ADD docker-etc_ddclient.conf /etc/ddclient/ddclient.conf
+ADD ddclient /usr/local/bin/ddclient
+ADD docker/ddclient-loop.sh /usr/local/bin/ddclient-loop
+ADD docker/docker-etc_ddclient.conf /etc/ddclient/ddclient.conf
 
 # CMD [ "ddclient-loop" ]
