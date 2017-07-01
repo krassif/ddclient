@@ -4,13 +4,13 @@
 if [ -z "$LOGIN" ]; then
     echo "ERR: LOGIN name is mandatory. Terminating.." && exit 1
 else
-    sed -i -e "s/^login=##YOUR_LOGIN##/login=$(LOGIN)/" /etc/ddclient/ddclient.conf
+    sed -i -e "s/^login=##YOUR_LOGIN##/login=$LOGIN/" /etc/ddclient/ddclient.conf
 fi
 
 if [ -z "$PASS" ]; then
     echo "ERR: PASS is mandatory. Terminating.." && exit 1
 else
-    sed -i -e "s/^password=##YOUR_PASS##/password=$(PASS)/" /etc/ddclient/ddclient.conf
+    sed -i -e "s/^password=##YOUR_PASS##/password=$PASS/" /etc/ddclient/ddclient.conf
 fi
 
 if [ -z "$HOST" ]; then
@@ -22,7 +22,7 @@ fi
 if [ -z "$EMAIL" ]; then
     echo "INFO: No email specified, no emails will be sent."
 else
-    sed -i -e "s/^mail-failure=##YOUR_EMAIL##/mail-failure=$(EMAIL)/" /etc/ddclient/ddclient.conf
+    sed -i -e "s/^mail-failure=##YOUR_EMAIL##/mail-failure=$EMAIL/" /etc/ddclient/ddclient.conf
 fi
 
 if [ -z "$SSL" ]; then
