@@ -21,4 +21,4 @@ ADD docker/docker-etc_ddclient.conf /etc/ddclient/ddclient.conf
 
 RUN chmod 600 /etc/ddclient/ddclient.conf
 
-CMD [ "ddclient-loop > /var/log/ddclient/server.log 2>&1" ]
+CMD [ "/bin/sh", "-c", "ddclient-loop > /var/log/ddclient/server.log 2>&1" ]
