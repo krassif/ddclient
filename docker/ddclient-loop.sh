@@ -2,19 +2,19 @@
 
 
 if [ -z "$LOGIN" ]; then
-    echo "ERR: LOGIN name is mandatory. Terminating.."
+    echo "ERR: LOGIN name is mandatory. Terminating.." && exit 1
 else
     sed -i -e "s/^login=##YOUR_LOGIN##/login=$(LOGIN)/" /etc/ddclient/ddclient.conf
 fi
 
 if [ -z "$PASS" ]; then
-    echo "ERR: PASS is mandatory. Terminating.."
+    echo "ERR: PASS is mandatory. Terminating.." && exit 1
 else
     sed -i -e "s/^password=##YOUR_PASS##/password=$(PASS)/" /etc/ddclient/ddclient.conf
 fi
 
 if [ -z "$HOST" ]; then
-    echo "ERR: HOST is mandatory. Terminating.."
+    echo "ERR: HOST is mandatory. Terminating.." && exit 1
 else
     sed -i -e "s/^##YOUR_HOSTNAME##/$(HOST)/" /etc/ddclient/ddclient.conf
 fi
@@ -39,11 +39,34 @@ echo_time() {
      date +"[ %Y-%m-%d %H:%M Z ] $(printf "%s " "$@" | sed 's/%/%%/g')"
 }
 
+OUT=$(ddclient -daemon=0 -noquiet); R=$?
+if [ "$R" -ne "0" ]; then
+    # exit 1
+    echo "Oops"
+fi
+echo_time $OUT
+
+er_count=0
 while :
 do
-    OUT=$(ddclient -daemon=0 -noquiet)
+    OUT=$(ddclient -daemon=0 -noquiet); R=$?
+    if [ "$R" -ne "0" ]; then
+        echo_time "ERR: ddclient has failed. Inspect the output for additional info."
+        er_count=`expr $er_count + 1`
+    else
+        er_count=0
+    fi
+
     if [ ! -z "$OUT" ]; then    
         echo_time $OUT
     fi;
-    sleep $(DAEMON)
+
+    if [ $er_count -ge 10 ]; then
+        exit 1
+    fi
+
+    sleep $(DAEMON) || exit 1
+
 done
+
+exit 0
