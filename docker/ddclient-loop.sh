@@ -49,7 +49,7 @@ echo_time $OUT
 er_count=0
 while :
 do
-    OUT=$(ddclient -daemon=0 -noquiet); R=$?
+    OUT=$(eval "ddclient -daemon=0 -noquiet $DDC_OPTS"); R=$?
     if [ $R -ne 0 ]; then
         echo_time "ERR: ddclient has failed: $R. Inspect the output for additional info."
         er_count=`expr $er_count + 1`
