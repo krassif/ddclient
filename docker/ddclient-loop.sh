@@ -29,7 +29,7 @@ if [ -z "$SSL" ]; then
     sed -i -e "s/^ssl=yes$//" /etc/ddclient/ddclient.conf
 fi
 
-if [ -z "$DAEMON"]; then
+if [ -z "$DAEMON" ]; then
     DAEMON=300
 fi
 echo "INFO: Running IP update/ check every $DAEMON seconds.."
