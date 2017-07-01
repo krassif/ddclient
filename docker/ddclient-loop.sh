@@ -38,29 +38,18 @@ echo_time() {
      date +"[ %Y-%m-%d %H:%M Z ] $(printf "%s " "$@" | sed 's/%/%%/g')"
 }
 
-exit 0
-
-OUT=$(ddclient -daemon=0 -noquiet); R=$?
-if [ $R -ne 0 ]; then
-    # exit 1
-    echo "Oops $R"
-fi
-echo_time $OUT
-
 er_count=0
 while :
 do
-    OUT=$(eval "ddclient -daemon=0 -noquiet $DDC_OPTS" 2>&1 | sed "s/^/[command1] /"); R=$?
+    eval "ddclient -daemon=0 -noquiet $DDC_OPTS" 2>&1 | while read line ; do
+            echo_time $line
+        done; R=$?
     if [ $R -ne 0 ]; then
         echo_time "ERR: ddclient has failed: $R. Inspect the output for additional info."
         er_count=`expr $er_count + 1`
     else
         er_count=0
     fi
-
-    if [ ! -z "$OUT" ]; then    
-        echo_time $OUT
-    fi;
 
     if [ $er_count -ge 10 ]; then
         exit 1
