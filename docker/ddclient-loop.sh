@@ -40,9 +40,9 @@ echo_time() {
 }
 
 OUT=$(ddclient -daemon=0 -noquiet); R=$?
-if [ "$R" -ne "0" ]; then
+if [ $R -ne 0 ]; then
     # exit 1
-    echo "Oops"
+    echo "Oops $R"
 fi
 echo_time $OUT
 
@@ -50,7 +50,7 @@ er_count=0
 while :
 do
     OUT=$(ddclient -daemon=0 -noquiet); R=$?
-    if [ "$R" -ne "0" ]; then
+    if [ $R -ne 0 ]; then
         echo_time "ERR: ddclient has failed. Inspect the output for additional info."
         er_count=`expr $er_count + 1`
     else
