@@ -18,4 +18,4 @@ ADD ddclient /usr/local/bin/ddclient
 ADD docker/ddclient-loop.sh /usr/local/bin/ddclient-loop
 ADD docker/docker-etc_ddclient.conf /etc/ddclient/ddclient.conf
 
-# CMD [ "ddclient-loop" ]
+CMD [ "ddclient-loop" ]
